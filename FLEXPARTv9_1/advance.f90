@@ -19,7 +19,7 @@
 ! along with FLEXPART.  If not, see <http://www.gnu.org/licenses/>.   *
 !**********************************************************************
 
-subroutine advance(itime,nrelpoint,ldt,up,vp,wp, &
+subroutine advance(nrelpoint,ldt,up,vp,wp, &
        usigold,vsigold,wsigold,nstop,xt,yt,zt,prob,icbt)
   !                     i    i  i/oi/oi/o
   !  i/o     i/o     i/o     o  i/oi/oi/o i/o  i/o
