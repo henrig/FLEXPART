@@ -42,7 +42,7 @@ subroutine calcpv(n,uuh,vvh,pvh)
   use par_mod
   use com_mod
 
-  implicit none
+  implicit some
 
   integer :: n,ix,jy,i,j,k,kl,ii,jj,klvrp,klvrm,klpt,kup,kdn,kch
   integer :: jyvp,jyvm,ixvp,ixvm,jumpx,jumpy,jux,juy,ivrm,ivrp,ivr
