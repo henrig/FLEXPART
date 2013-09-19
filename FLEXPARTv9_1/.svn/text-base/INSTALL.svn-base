@@ -1,0 +1,54 @@
+FLEXPART V8.2 installation guidelines
+-------------------------------------
+
+1. Installing required libraries
+
+In order to process input files in GRiB2 format, FLEXPART V8.2 needs to be
+compiled with ECMWF's grib_api library version 1.8.0 and above. Since the api
+of the grib_api library may change in the future, upward compatibility cannot
+be guaranteed. The input files in GRiB2 format can be compressed to save
+bandwitdth and storage space. In order to make use of this feature, the jasper
+library needs to be installed on the system. Optionally, the emos library can
+be used to run FLEXPART with input files in GRiB1 format.
+
+The following steps should be executed in sequence (Lines starting with % are
+shell commands):
+
+1.1 Install jasper library (Version 1.900.1):
+- download jasper library (http://www.ece.uvic.ca/~mdadams/jasper/)
+% unzip jasper-1.900.1.zip
+% cd jasper-1.900.1
+% ./configure (--prefix=<installation path> if not to be installed at default path)
+% make
+% make check
+% make install
+
+1.2 Install grib_api library (Version 1.8.0 or later)
+- download grib_api library (http://www.ecmwf.int/products/data/software/download/grib_api.html)
+% tar -xvf grib_api-1.9.5.tar.gz
+% ./configure (--with-jasper=<path to jasper library> if not installed at default path)
+% make
+% make check
+% make install
+
+1.3 Optional: Install emos library (Version 000372)
+- download emos library (http://www.ecmwf.int/products/data/software/interpolation.html)
+% tar -xvf emos_000372.tar.gz
+% ./configure (--prefix=<installation path> if not to be installed at default path)
+% make
+% make check
+% make install
+
+2. Install FLEXPART V8.2
+
+- download FLEXPART source code archive (http://transport.nilu.no/flexpart/flexpart/view)
+% tar -xvf flexpart82.tar.gz
+- optionally edit the file includepar to set parameters for the data center, grid dimension, and particle number
+- edit the LIBRARY path variable in the makefiles according to the position of libgrib_api and libjasper
+% make -f makefile.<center>_<compiler>_<system>
+In the above statement,
+- center can be one of: gfs, ecmwf, ecmwf_emos, gfs_emos
+- compiler can be one of absoft or gfortran (emos library only with absoft)
+- system can be one of 32, 64 (emos only 32). The system parameter must match that of the compiled libraries. 
+When recompiling after making changes, all object and module files can be removed using
+% make -f makefile.<center>_<compiler>_<system> clean

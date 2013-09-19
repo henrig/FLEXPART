@@ -1,0 +1,1 @@
+tar -cvf FLEXPART_90.tar *.f90 makefile* inc* options --exclude .svn 
